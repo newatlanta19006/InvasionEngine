@@ -3,19 +3,33 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 
 namespace InvasionEngine.Core.UI.Controls
 {
-    public class UIControlWindow:UIControlBase
+    public class UIControlWindow:UIControl
     {
-        public string TextureName { get; set; }
-        public Texture2D Texture { get; private set; }
+        public Color BackgroundColor { get; set; }
+        private Texture2D BackgroundTexture;
 
         public UIControlWindow() : base()
         {
-            this.TextureName = null;
-            this.Texture = null;
         }
 
+        public override void LoadContent(ContentManager content)
+        {
+            BackgroundTexture = content.Load<Texture2D>("UIEngine\\White1x1");
+        }
+
+        public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+        {
+            spriteBatch.Draw(BackgroundTexture, new Rectangle(X, Y, Width, Height), BackgroundColor);
+        }
+
+        public override void Update(GameTime gameTime)
+        {
+            
+        }
     }
 }
